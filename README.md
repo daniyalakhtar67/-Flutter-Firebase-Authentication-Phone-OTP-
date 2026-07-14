@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # phone_auth
 
 A new Flutter project.
@@ -15,3 +16,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# -Flutter-Firebase-Authentication-Phone-OTP-
+>>>>>>> 8ebafd6c99e3f2c59ba5b222281c9fef05e0fa7d
