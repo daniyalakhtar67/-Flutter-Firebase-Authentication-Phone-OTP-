@@ -17,62 +17,39 @@ class _OptscreenState extends State<Optscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('OTP Screen'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Enter OTP')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
               controller: otp,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'Enter OTP',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
+              decoration: InputDecoration(hintText: 'Enter OTP'),
             ),
             SizedBox(height: 20),
             isLoading
                 ? CircularProgressIndicator()
                 : ElevatedButton(
               onPressed: () async {
-                if (otp.text.trim().isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter the OTP')),
-                  );
-                  return;
-                }
-
                 setState(() => isLoading = true);
 
-                try {
-                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                    verificationId: widget.verificationId,
-                    smsCode: otp.text.trim(),
-                  );
+                PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                  verificationId: widget.verificationId,
+                  smsCode: otp.text.trim(),
+                );
 
-                  await FirebaseAuth.instance.signInWithCredential(credential);
+                await FirebaseAuth.instance.signInWithCredential(credential);
 
-                  setState(() => isLoading = false);
+                setState(() => isLoading = false);
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Postscreen()),
-                  );
-                } catch (ex) {
-                  setState(() => isLoading = false);
-                  print('OTP verification failed: ${ex.toString()}');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Invalid OTP: ${ex.toString()}')),
-                  );
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Postscreen()),
+                );
               },
-              child: Text('Enter'),
+              child: Text('Verify'),
             ),
           ],
         ),

@@ -10,6 +10,16 @@ class Postscreen extends StatefulWidget {
 class _PostscreenState extends State<Postscreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Post Screen'),
+        centerTitle: true,
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.lightBlue.shade200,
+      ),
+    );
   }
 }

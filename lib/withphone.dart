@@ -16,10 +16,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Login')),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Column(
@@ -28,54 +25,25 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
             TextFormField(
               controller: phone,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'Enter Phone Number (e.g. 03001234567)',
-                suffixIcon: Icon(Icons.phone),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
+              decoration: InputDecoration(hintText: 'Enter Phone Number'),
             ),
             SizedBox(height: 20),
             isLoading
                 ? CircularProgressIndicator()
                 : ElevatedButton(
               onPressed: () async {
-                if (phone.text.trim().isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter a phone number')),
-                  );
-                  return;
-                }
-
                 setState(() => isLoading = true);
 
-                // Strip leading 0 before adding country code
-                String rawNumber = phone.text.trim();
-                if (rawNumber.startsWith('0')) {
-                  rawNumber = rawNumber.substring(1);
-                }
-
-                // Adjust +92 to your country code if needed
-                String fullPhoneNumber = '+92$rawNumber';
-
-                print('Sending phone number: $fullPhoneNumber');
-
+                // simple phone number: +92 + number without leading 0
+                String number = '+92${phone.text.trim().substring(1)}';
                 await FirebaseAuth.instance.verifyPhoneNumber(
-                  phoneNumber: fullPhoneNumber,
-                  verificationCompleted: (PhoneAuthCredential credential) async {
-                    print('Auto-verification completed');
-                    await FirebaseAuth.instance.signInWithCredential(credential);
-                  },
-                  verificationFailed: (FirebaseException ex) {
-                    print('Verification failed: ${ex.code} - ${ex.message}');
+                  phoneNumber: number,
+                  verificationCompleted: (credential) {},
+                  verificationFailed: (e) {
                     setState(() => isLoading = false);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error: ${ex.message}')),
-                    );
+                    print(e.message);
                   },
-                  codeSent: (String verificationId, int? token) {
-                    print('Code sent, verificationId: $verificationId');
+                  codeSent: (String verificationId, resendToken) {
                     setState(() => isLoading = false);
                     Navigator.push(
                       context,
@@ -84,12 +52,10 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                       ),
                     );
                   },
-                  codeAutoRetrievalTimeout: (String verificationId) {
-                    print('Auto retrieval timeout, verificationId: $verificationId');
-                  },
+                  codeAutoRetrievalTimeout: (verificationId) {},
                 );
               },
-              child: Text('Verify Phone Number'),
+              child: Text('Send OTP'),
             ),
           ],
         ),
