@@ -1,3 +1,4 @@
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,24 @@ class _PostscreenState extends State<Postscreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Expanded(child: StreamBuilder(stream: ref.onValue, builder: (context, AsyncSnapshot<DatabaseEvent>snapshot){
+            //   if(!snapshot.hasData){
+            //     return CircularProgressIndicator();
+            //   }else{
+            //     Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as dynamic;
+            //     List<dynamic> list = [];
+            //     list.clear();
+            //     list = map.values.toList();
+            //     return ListView.builder(
+            //         itemCount: snapshot.data!.snapshot.children.length,
+            //         itemBuilder: (context, index){
+            //           return ListTile(
+            //             title: Text(list[index]['title']),
+            //             subtitle: Text(list[index]['title']),
+            //           );
+            //         });
+            //   }
+            // })),
             Expanded(
               child: FirebaseAnimatedList(query: ref,
                   defaultChild: loading ? CircularProgressIndicator(): Text('Loading'),

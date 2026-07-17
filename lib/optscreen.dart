@@ -34,14 +34,11 @@ class _OptscreenState extends State<Optscreen> {
                 : ElevatedButton(
               onPressed: () async {
                 setState(() => isLoading = true);
-
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(
                   verificationId: widget.verificationId,
                   smsCode: otp.text.trim(),
                 );
-
                 await FirebaseAuth.instance.signInWithCredential(credential);
-
                 setState(() => isLoading = false);
 
                 Navigator.push(
