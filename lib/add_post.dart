@@ -43,9 +43,10 @@ class _AddPostState extends State<AddPost> {
                 : InkWell(
               onTap: () async {
                 setState(() => isLoading = true);
+                String id = DateTime.now().microsecondsSinceEpoch.toString();
                 try {
-                  await dbRef.child(DateTime.now().microsecondsSinceEpoch.toString()).child('Child').set({
-                    'id': DateTime.now().microsecondsSinceEpoch.toString(),
+                  await dbRef.child(id).set({
+                    'id': id,
                     'title': post.text.toString(),
                     // 'text': post.text.trim(),
                   }).then((value){
