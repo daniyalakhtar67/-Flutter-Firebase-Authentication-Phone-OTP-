@@ -22,31 +22,43 @@ class _PostscreenState extends State<Postscreen> {
         title: Text('Post Screen', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: Colors.lightBlue.shade200,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
-
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Expanded(child: StreamBuilder(stream: ref.onValue, builder: (context, AsyncSnapshot<DatabaseEvent>snapshot){
-            //   if(!snapshot.hasData){
-            //     return CircularProgressIndicator();
-            //   }else{
-            //     Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as dynamic;
-            //     List<dynamic> list = [];
-            //     list.clear();
-            //     list = map.values.toList();
-            //     return ListView.builder(
-            //         itemCount: snapshot.data!.snapshot.children.length,
-            //         itemBuilder: (context, index){
+            // Expanded(
+            //   child: StreamBuilder(
+            //     stream: ref.onValue,
+            //     builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+            //       if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+            //         return Center(child: CircularProgressIndicator());
+            //       }
+            //
+            //       final raw = snapshot.data!.snapshot.value;
+            //
+            //       if (raw is! Map) {
+            //         return Center(child: Text('No data found'));
+            //       }
+            //
+            //       Map<dynamic, dynamic> map = raw;
+            //       List<dynamic> list = map.values.toList();
+            //
+            //       return ListView.builder(
+            //         itemCount: list.length,
+            //         itemBuilder: (context,int index) {
             //           return ListTile(
-            //             title: Text(list[index]['title']),
-            //             subtitle: Text(list[index]['title']),
+            //             title: Text(list[index]['title'].toString()),
+            //             subtitle: Text(list[index]['id'].toString()),
             //           );
-            //         });
-            //   }
-            // })),
+            //         },
+            //       );
+            //     },
+            //   ),
+            // ),
             Expanded(
               child: FirebaseAnimatedList(query: ref,
                   defaultChild: loading ? CircularProgressIndicator(): Text('Loading'),
