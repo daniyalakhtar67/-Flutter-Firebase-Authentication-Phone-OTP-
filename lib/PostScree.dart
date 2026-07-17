@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_auth/add_post.dart';
 
@@ -9,6 +11,9 @@ class Postscreen extends StatefulWidget {
 }
 
 class _PostscreenState extends State<Postscreen> {
+
+  final ref = FirebaseDatabase.instance.ref('Data');
+  bool loading = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,18 @@ class _PostscreenState extends State<Postscreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: (){
+            Expanded(
+              child: FirebaseAnimatedList(query: ref,
+                  defaultChild: loading ? CircularProgressIndicator(): Text('Loading'),
+                  itemBuilder: ( context, snapshot, animation, index){
+                return ListTile(
+                  title: Text(snapshot.child('title').value.toString()),
+                  subtitle: Text(snapshot.child('id').value.toString()),
+                );
+                    }
+                    ),
+            ),
+            FloatingActionButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddPost()));
             }, child: Center(child: Icon(Icons.add, color: Colors.black,)))
           ],

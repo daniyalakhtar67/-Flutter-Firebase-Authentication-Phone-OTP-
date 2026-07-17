@@ -11,7 +11,7 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   bool isLoading = false;
-  final dbRef = FirebaseDatabase.instance.ref('Post'); // here table works as a table
+  final dbRef = FirebaseDatabase.instance.ref('Data'); // here table works as a table
   final post = TextEditingController();
 
   @override
