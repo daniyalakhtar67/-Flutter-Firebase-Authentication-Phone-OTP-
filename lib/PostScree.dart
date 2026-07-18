@@ -73,7 +73,11 @@ class _PostscreenState extends State<Postscreen> {
                               PopupMenuItem(
                                   value: 1,
                                   child:ListTile(
-                                    onTap: (){},
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      // ref.child(snapshot.child(key).value.toString()).remove();
+                                      ref.child(key).remove();
+                                    },
                                     title: Text('Delete'),
                                     leading: Icon(Icons.delete),
                                   ) )
@@ -113,7 +117,7 @@ class _PostscreenState extends State<Postscreen> {
       TextButton(onPressed: (){
         Navigator.pop(context);
         ref.child(id).update({
-      'title': editingController.text.toLowerCase(),   
+      'title': editingController.text.toLowerCase(),
       }).then((value){
       Utils().tomsg('Post Updated');
       }).onError((error, stackTrace){
