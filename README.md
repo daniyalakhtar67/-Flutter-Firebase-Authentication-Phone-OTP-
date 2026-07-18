@@ -1,6 +1,6 @@
 # Firebase Learning Journey 
 
-A hands-on repo where I'm learning Firebase with Flutter, updated daily as I pick up new concepts.
+A hands on repo where I'm learning Firebase with Flutter, updated daily as I pick up new concepts.
 
 ## What I've covered so far
 - Email/password Sign Up & Login
