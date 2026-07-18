@@ -1,21 +1,16 @@
-<<<<<<< HEAD
-# phone_auth
+# Firebase Learning Journey 🔥
 
-A new Flutter project.
+A hands-on repo where I'm learning Firebase with Flutter, updated daily as I pick up new concepts.
 
-## Getting Started
+## What I've covered so far
+- Email/password Sign Up & Login
+- Phone number authentication with OTP
+- Firebase Realtime Database
+- Create, Read, Update, Delete (CRUD) operations
 
-This project is a starting point for a Flutter application.
+## What's next
+- [ ] Firestore
+- [ ] Firebase Storage
+- [ ] Push Notifications (FCM)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# -Flutter-Firebase-Authentication-Phone-OTP-
->>>>>>> 8ebafd6c99e3f2c59ba5b222281c9fef05e0fa7d
+> This is a learning repo — code quality reflects where I was in the learning process on any given day, not a production standard. Feedback and suggestions welcome!
