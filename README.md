@@ -1,4 +1,4 @@
-# Firebase Learning Journey 🔥
+# Firebase Learning Journey 
 
 A hands-on repo where I'm learning Firebase with Flutter, updated daily as I pick up new concepts.
 
